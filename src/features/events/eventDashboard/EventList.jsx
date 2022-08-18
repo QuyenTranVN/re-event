@@ -1,11 +1,11 @@
 /** @format */
 
 import EventListItem from './EventListItem'
-const EventList = (props) => {
+const EventList = ({ events, selectEvent, onDeleteEvent }) => {
   return (
     <>
-      {props.events.map((event) => (
-        <EventListItem event={event} key={event.id} />
+      {events.map((event) => (
+        <EventListItem event={event} key={event.id} selectEvent={selectEvent} onDeleteEvent={onDeleteEvent} />
       ))}
     </>
   )
