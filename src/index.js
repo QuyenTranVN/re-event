@@ -1,8 +1,8 @@
 /** @format */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './app/layout/App'
-import '../src/app/layout/Style.css'
+import App from './App'
+import './Style.css'
 
 import reportWebVitals from './reportWebVitals'
 
