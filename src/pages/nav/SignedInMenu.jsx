@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom'
 import { Dropdown, Image, Menu } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom'
 
-const SignedInMenu = ({ authenticatedHandler, onShowNav }) => {
+const SignedInMenu = ({ authenticatedHandler }) => {
   let navigate = useNavigate()
   const logoutHandler = () => {
     navigate('/')
     authenticatedHandler(false)
-    onShowNav(false)
   }
   return (
     <Menu.Item position='right'>

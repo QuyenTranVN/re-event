@@ -2,8 +2,16 @@
 import cuid from 'cuid'
 import { useState } from 'react'
 import { Button, Form, Header, Segment } from 'semantic-ui-react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { CreateEvent, UpdateEvent } from '../eventAction'
+import { useNavigate } from 'react-router-dom'
+const EventForm = () => {
+  let navigate = useNavigate()
+  let { id } = useParams()
+  const selectedEvent = useSelector((state) => state.event.events.find((event) => event.id === id))
+  const dispatch = useDispatch()
 
-const EventForm = ({ createEvent, setFormClose, selectedEvent, onUpdateEvent }) => {
   const initialValues = selectedEvent ?? {
     title: '',
     category: '',
@@ -17,14 +25,17 @@ const EventForm = ({ createEvent, setFormClose, selectedEvent, onUpdateEvent }) 
 
   const handlerFormSubmit = (e) => {
     e.preventDefault()
-    selectedEvent ? onUpdateEvent({ ...selectedEvent, ...values }) : createEvent({ ...values, id: cuid, hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg', attendees: [{ photoURL: 'https://randomuser.me/api/portraits/men/20.jpg', id: cuid }] })
-
-    setFormClose()
+    selectedEvent ? dispatch(UpdateEvent({ ...selectedEvent, ...values })) : dispatch(CreateEvent({ ...values, id: cuid, hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg', attendees: [{ photoURL: 'https://randomuser.me/api/portraits/men/20.jpg', id: cuid }] }))
+    navigate('/events')
   }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
+  }
+
+  const cancelFormHandler = () => {
+    navigate('/events')
   }
 
   return (
@@ -50,7 +61,7 @@ const EventForm = ({ createEvent, setFormClose, selectedEvent, onUpdateEvent }) 
           <input type='date' placeholder='Date' name='date' value={values.date} onChange={(e) => handleInputChange(e)} />
         </Form.Field>
         <Button type='submit' floated='right' positive content='Submit' />
-        <Button type='button' floated='right' content='Cancel' onClick={setFormClose} />
+        <Button type='button' floated='right' content='Cancel' onClick={cancelFormHandler} />
       </Form>
     </Segment>
   )

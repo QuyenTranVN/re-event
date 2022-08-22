@@ -6,12 +6,12 @@ import EventDetailedPage from '../pages/events/eventDetail/EventDetailedPage'
 import EventForm from '../pages/events/eventForm/EventForm'
 import HomePage from '../pages/home/HomePage'
 
-/** @format */
 const publicRoutes = [
   { path: '/', component: HomePage, layout: WelcomeLayout },
   { path: '/events', component: EventDashboard },
   { path: '/events/:id', component: EventDetailedPage },
   { path: '/events/createEvent', component: EventForm },
+  { path: '/manage/:id', component: EventForm },
 ]
 
 const privateRoutes = []
