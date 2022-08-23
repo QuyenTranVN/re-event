@@ -5,11 +5,16 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './Style.css'
+import 'react-calendar/dist/Calendar.css'
 
 import reportWebVitals from './reportWebVitals'
 import configureStore from './store/configureStore'
 import ScrollToTop from './app/helpers/ScrollToTop'
+import 'react-toastify/dist/ReactToastify.min.css'
+import { loadEvent } from './pages/events/eventAction'
+
 const store = configureStore()
+store.dispatch(loadEvent())
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>

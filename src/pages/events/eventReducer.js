@@ -1,10 +1,9 @@
 /** @format */
 
-import { sampleData } from '../../app/api/sampleData'
-import { CREATE_EVENT, DELETE_EVENT, UPDATE_EVENT } from './eventConstants'
+import { CREATE_EVENT, DELETE_EVENT, FETCH_EVENT, UPDATE_EVENT } from './eventConstants'
 
 const initialState = {
-  events: sampleData,
+  events: [],
 }
 
 const eventReducer = (state = initialState, { type, payload }) => {
@@ -25,7 +24,11 @@ const eventReducer = (state = initialState, { type, payload }) => {
         ...state,
         events: [...state.events.filter((event) => event.id !== payload)],
       }
-
+    case FETCH_EVENT:
+      return {
+        ...state,
+        events: payload,
+      }
     default:
       return state
   }

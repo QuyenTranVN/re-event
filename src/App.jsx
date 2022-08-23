@@ -5,11 +5,13 @@ import { DefaultLayout } from './app/layout'
 import { useLocation } from 'react-router-dom'
 import './Style.css'
 import ModalManager from './app/common/modals/ModalManager'
+import { ToastContainer } from 'react-toastify'
 function App() {
   const { key } = useLocation()
   return (
     <>
       <ModalManager />
+      <ToastContainer position='bottom-right' hideProgressBar />
       <Routes>
         {publicRoutes.map((route, index) => {
           const Page = route.component
