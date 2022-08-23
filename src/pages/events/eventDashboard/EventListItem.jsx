@@ -5,6 +5,7 @@ import EventListAttendee from './EventListAttendee'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { DeleteEvent } from '../eventAction'
+import format from 'date-fns/format'
 const EventListItem = ({ event }) => {
   const dispatch = useDispatch()
   return (
@@ -22,7 +23,7 @@ const EventListItem = ({ event }) => {
       </Segment>
       <Segment>
         <span>
-          <Icon name='clock' /> {event.date}
+          <Icon name='clock' /> {format(event.date, 'HHHH d, yyyy h:mm a')}
           <Icon name='marker' /> {event.venue}
         </span>
       </Segment>
@@ -36,9 +37,20 @@ const EventListItem = ({ event }) => {
       <Segment clearing>
         <span> {event.description} </span>
         <div>
-          <Button color='red' floated='right' content='Delete' onClick={() => dispatch(DeleteEvent(event.id))} />
+          <Button
+            color='red'
+            floated='right'
+            content='Delete'
+            onClick={() => dispatch(DeleteEvent(event.id))}
+          />
 
-          <Button color='teal' floated='right' content='View' as={Link} to={`/events/${event.id}`} />
+          <Button
+            color='teal'
+            floated='right'
+            content='View'
+            as={Link}
+            to={`/events/${event.id}`}
+          />
         </div>
       </Segment>
     </Segment.Group>
